@@ -1,453 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mini GES Projects</title>
-
-<style>
-
-body{
-    margin:0;
-    padding:20px;
-    background:#f3f5f9;
-    font-family:Arial,sans-serif;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.stats{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    margin-bottom:25px;
-}
-
-.stat{
-    background:white;
-    padding:15px 20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.stat strong{
-    display:block;
-    font-size:28px;
-}
-
-.controls{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    margin-bottom:25px;
-}
-
-input{
-    flex:1;
-    min-width:250px;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    font-size:15px;
-}
-
-select{
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #ccc;
-}
-
-.card{
-    display:flex;
-    gap:20px;
-    background:white;
-    border-radius:15px;
-    margin-bottom:20px;
-    padding:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.card img{
-    width:230px;
-    height:150px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-.content{
-    flex:1;
-}
-
-.order{
-    font-size:18px;
-    font-weight:bold;
-    color:#888;
-    margin-bottom:10px;
-}
-
-.mchj{
-    display:inline-block;
-    background:#d8f3dc;
-    color:#1b6b34;
-    padding:5px 10px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-.id{
-    display:inline-block;
-    background:#1e5bb8;
-    color:white;
-    padding:6px 10px;
-    border-radius:7px;
-    font-weight:bold;
-    text-decoration:none;
-    margin-bottom:10px;
-}
-
-.id:hover{
-    background:#17458c;
-}
-
-.title{
-    font-size:20px;
-    font-weight:bold;
-    color:#1b3f88;
-    margin-bottom:12px;
-}
-
-.info{
-    margin-bottom:8px;
-}
-
-.label{
-    color:#666;
-    font-size:14px;
-}
-
-.date{
-    display:inline-block;
-    background:#ffe08a;
-    padding:4px 8px;
-    border-radius:5px;
-    font-weight:bold;
-}
-
-@media(max-width:900px){
-
-    .card{
-        flex-direction:column;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lots List Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
-    .card img{
-        width:100%;
-        height:auto;
+    body {
+      background: #f4f4f4;
+      padding: 20px;
+      color: #222;
     }
 
-}
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-</style>
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th {
+      background: #111827;
+      color: white;
+      padding: 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    tr:hover {
+      background: #f9fafb;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: bold;
+    }
+
+    .stats {
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<h1>Mini GES Projects</h1>
-
-<!-- STATS -->
-
-<div class="stats">
-
-    <div class="stat">
-        <strong id="totalLots">20</strong>
-        <span>Total Lots</span>
-    </div>
-
-    <div class="stat">
-        <strong id="dimagiCount">8</strong>
-        <span>Dimagi</span>
-    </div>
-
-    <div class="stat">
-        <strong id="omadCount">2</strong>
-        <span>Omad Bekzod</span>
-    </div>
-
-    <div class="stat">
-        <strong id="sandooqCount">10</strong>
-        <span>SANDOOQ MCHJ</span>
-    </div>
-
-</div>
-
-<!-- SEARCH -->
-
-<div class="controls">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search by ID, GES, MFY..."
-onkeyup="filterLots()"
->
-
-<select id="mchjFilter" onchange="filterLots()">
-
-<option value="all">All MCHJ</option>
-<option value="dimagi">Dimagi</option>
-<option value="omad">Omad Bekzod</option>
-<option value="sandooq">SANDOOQ MCHJ</option>
-
-</select>
-
-</div>
-
-<!-- CARD 1 -->
-
-<div class="card" data-mchj="sandooq">
-
-<img src="https://picsum.photos/400/250?1">
-
-<div class="content">
-
-<div class="order">#1</div>
-
-<div class="mchj">SANDOOQ MCHJ</div>
-
-<br>
-
-<a class="id"
-href="https://e-auksion.uz/lot-view?lot_id=22838280"
-target="_blank">
-22838280
-</a>
-
-<div class="title">
-mikro GES-54 qurish loyihasi (4 kVt)
-</div>
-
-<div class="info">
-<div class="label">Date:</div>
-<div class="date">07.05.2026</div>
-</div>
-
-<div class="info">
-<div class="label">Location:</div>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 2 -->
-
-<div class="card" data-mchj="sandooq">
-
-<img src="https://picsum.photos/400/250?2">
-
-<div class="content">
-
-<div class="order">#2</div>
-
-<div class="mchj">SANDOOQ MCHJ</div>
-
-<br>
-
-<a class="id"
-href="https://e-auksion.uz/lot-view?lot_id=22838279"
-target="_blank">
-22838279
-</a>
-
-<div class="title">
-mikro GES-58 qurish loyihasi (4 kVt)
-</div>
-
-<div class="info">
-<div class="label">Date:</div>
-<div class="date">07.05.2026</div>
-</div>
-
-<div class="info">
-<div class="label">Location:</div>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 3 -->
-
-<div class="card" data-mchj="omad">
-
-<img src="https://picsum.photos/400/250?3">
-
-<div class="content">
-
-<div class="order">#3</div>
-
-<div class="mchj">Omad Bekzod</div>
-
-<br>
-
-<a class="id"
-href="https://e-auksion.uz/lot-view?lot_id=22758719"
-target="_blank">
-22758719
-</a>
-
-<div class="title">
-mikro GES-9 qurish loyihasi (4 kVt)
-</div>
-
-<div class="info">
-<div class="label">Date:</div>
-<div class="date">04.05.2026</div>
-</div>
-
-<div class="info">
-<div class="label">Location:</div>
-Buxoro viloyati, G'ijduvon tumani, Ulfatbibi MFY
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 4 -->
-
-<div class="card" data-mchj="dimagi">
-
-<img src="https://picsum.photos/400/250?4">
-
-<div class="content">
-
-<div class="order">#4</div>
-
-<div class="mchj">Dimagi</div>
-
-<br>
-
-<a class="id"
-href="https://e-auksion.uz/lot-view?lot_id=22838282"
-target="_blank">
-22838282
-</a>
-
-<div class="title">
-mikro GES-50 qurish loyihasi (4 kVt)
-</div>
-
-<div class="info">
-<div class="label">Date:</div>
-<div class="date">07.05.2026</div>
-</div>
-
-<div class="info">
-<div class="label">Location:</div>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-updateStats();
-
-function filterLots(){
-
-    let input =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
-
-    let filter =
-        document.getElementById("mchjFilter")
-        .value;
-
-    let cards =
-        document.querySelectorAll(".card");
-
-    cards.forEach(card=>{
-
-        let text =
-            card.innerText.toLowerCase();
-
-        let mchj =
-            card.dataset.mchj;
-
-        let searchMatch =
-            text.includes(input);
-
-        let mchjMatch =
-            filter === "all" ||
-            mchj === filter;
-
-        if(searchMatch && mchjMatch){
-
-            card.style.display = "flex";
-
-        }else{
-
-            card.style.display = "none";
-
-        }
-
+  <h1>Lots List Dashboard</h1>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by lot name or ID..." />
+
+    <select id="mchjFilter">
+      <option value="all">All MCHJ</option>
+    </select>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>MCHJ</th>
+        <th>Lot Name</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script>
+    // Excel data converted into JSON
+    const lots = [
+      {
+        id: 22838282,
+        mchj: "Dimagi",
+        name: "Buxoro viloyati, G'ijduvon tumani, Baraka MFY, lot 1",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838281,
+        mchj: "Dimagi",
+        name: "Buxoro viloyati, G'ijduvon tumani, Baraka MFY, lot 2",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838275,
+        mchj: "Dimagi",
+        name: "Buxoro viloyati, G'ijduvon tumani, Baraka MFY, lot 3",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838274,
+        mchj: "Dimagi",
+        name: "Buxoro viloyati, G'ijduvon tumani, Baraka MFY, lot 4",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838273,
+        mchj: "Dimagi",
+        name: "Buxoro viloyati, G'ijduvon tumani, Baraka MFY, lot 5",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838272,
+        mchj: "Omad",
+        name: "Sample lot data 1",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838271,
+        mchj: "Omad",
+        name: "Sample lot data 2",
+        date: "07.05.2026"
+      },
+      {
+        id: 22838270,
+        mchj: "Sandooq",
+        name: "Sample lot data 3",
+        date: "07.05.2026"
+      }
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+    const searchInput = document.getElementById("searchInput");
+    const mchjFilter = document.getElementById("mchjFilter");
+    const stats = document.getElementById("stats");
+
+    // Populate filter dropdown
+    const uniqueMCHJ = [...new Set(lots.map(lot => lot.mchj))];
+
+    uniqueMCHJ.forEach(name => {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      mchjFilter.appendChild(option);
     });
 
-    updateStats();
+    function renderTable(data) {
+      tableBody.innerHTML = "";
 
-}
+      data.forEach(lot => {
+        const row = document.createElement("tr");
 
-function updateStats(){
+        row.innerHTML = `
+          <td>${lot.id}</td>
+          <td><span class="badge">${lot.mchj}</span></td>
+          <td>${lot.name}</td>
+          <td>${lot.date}</td>
+        `;
 
-    let cards =
-        document.querySelectorAll(".card");
+        tableBody.appendChild(row);
+      });
 
-    let total = 0;
-    let dimagi = 0;
-    let omad = 0;
-    let sandooq = 0;
+      stats.textContent = `Showing ${data.length} lots`;
+    }
 
-    cards.forEach(card=>{
+    function filterData() {
+      const search = searchInput.value.toLowerCase();
+      const mchj = mchjFilter.value;
 
-        if(card.style.display !== "none"){
+      const filtered = lots.filter(lot => {
+        const matchesSearch =
+          lot.name.toLowerCase().includes(search) ||
+          String(lot.id).includes(search);
 
-            total++;
+        const matchesMCHJ = mchj === "all" || lot.mchj === mchj;
 
-            if(card.dataset.mchj === "dimagi"){
-                dimagi++;
-            }
+        return matchesSearch && matchesMCHJ;
+      });
 
-            if(card.dataset.mchj === "omad"){
-                omad++;
-            }
+      renderTable(filtered);
+    }
 
-            if(card.dataset.mchj === "sandooq"){
-                sandooq++;
-            }
+    searchInput.addEventListener("input", filterData);
+    mchjFilter.addEventListener("change", filterData);
 
-        }
-
-    });
-
-    document.getElementById("totalLots").innerText = total;
-    document.getElementById("dimagiCount").innerText = dimagi;
-    document.getElementById("omadCount").innerText = omad;
-    document.getElementById("sandooqCount").innerText = sandooq;
-
-}
-
-</script>
-
+    renderTable(lots);
+  </script>
 </body>
 </html>
