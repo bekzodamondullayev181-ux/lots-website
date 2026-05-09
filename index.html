@@ -1,185 +1,453 @@
-<!-- REPLACE ONLY THE <tbody id="lotTable"> ... </tbody> PART WITH THIS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<tbody id="lotTable">
+<title>Mini GES Projects</title>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838282 ges-50">
-<td class="index">1</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838282" target="_blank">
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    background:#f3f5f9;
+    font-family:Arial,sans-serif;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:15px 20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+}
+
+.controls{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+input{
+    flex:1;
+    min-width:250px;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+
+select{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+.card{
+    display:flex;
+    gap:20px;
+    background:white;
+    border-radius:15px;
+    margin-bottom:20px;
+    padding:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.card img{
+    width:230px;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.content{
+    flex:1;
+}
+
+.order{
+    font-size:18px;
+    font-weight:bold;
+    color:#888;
+    margin-bottom:10px;
+}
+
+.mchj{
+    display:inline-block;
+    background:#d8f3dc;
+    color:#1b6b34;
+    padding:5px 10px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.id{
+    display:inline-block;
+    background:#1e5bb8;
+    color:white;
+    padding:6px 10px;
+    border-radius:7px;
+    font-weight:bold;
+    text-decoration:none;
+    margin-bottom:10px;
+}
+
+.id:hover{
+    background:#17458c;
+}
+
+.title{
+    font-size:20px;
+    font-weight:bold;
+    color:#1b3f88;
+    margin-bottom:12px;
+}
+
+.info{
+    margin-bottom:8px;
+}
+
+.label{
+    color:#666;
+    font-size:14px;
+}
+
+.date{
+    display:inline-block;
+    background:#ffe08a;
+    padding:4px 8px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+@media(max-width:900px){
+
+    .card{
+        flex-direction:column;
+    }
+
+    .card img{
+        width:100%;
+        height:auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Mini GES Projects</h1>
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <strong id="totalLots">20</strong>
+        <span>Total Lots</span>
+    </div>
+
+    <div class="stat">
+        <strong id="dimagiCount">8</strong>
+        <span>Dimagi</span>
+    </div>
+
+    <div class="stat">
+        <strong id="omadCount">2</strong>
+        <span>Omad Bekzod</span>
+    </div>
+
+    <div class="stat">
+        <strong id="sandooqCount">10</strong>
+        <span>SANDOOQ MCHJ</span>
+    </div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="controls">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by ID, GES, MFY..."
+onkeyup="filterLots()"
+>
+
+<select id="mchjFilter" onchange="filterLots()">
+
+<option value="all">All MCHJ</option>
+<option value="dimagi">Dimagi</option>
+<option value="omad">Omad Bekzod</option>
+<option value="sandooq">SANDOOQ MCHJ</option>
+
+</select>
+
+</div>
+
+<!-- CARD 1 -->
+
+<div class="card" data-mchj="sandooq">
+
+<img src="https://picsum.photos/400/250?1">
+
+<div class="content">
+
+<div class="order">#1</div>
+
+<div class="mchj">SANDOOQ MCHJ</div>
+
+<br>
+
+<a class="id"
+href="https://e-auksion.uz/lot-view?lot_id=22838280"
+target="_blank">
+22838280
+</a>
+
+<div class="title">
+mikro GES-54 qurish loyihasi (4 kVt)
+</div>
+
+<div class="info">
+<div class="label">Date:</div>
+<div class="date">07.05.2026</div>
+</div>
+
+<div class="info">
+<div class="label">Location:</div>
+Buxoro viloyati, G'ijduvon tumani, Baraka MFY
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="card" data-mchj="sandooq">
+
+<img src="https://picsum.photos/400/250?2">
+
+<div class="content">
+
+<div class="order">#2</div>
+
+<div class="mchj">SANDOOQ MCHJ</div>
+
+<br>
+
+<a class="id"
+href="https://e-auksion.uz/lot-view?lot_id=22838279"
+target="_blank">
+22838279
+</a>
+
+<div class="title">
+mikro GES-58 qurish loyihasi (4 kVt)
+</div>
+
+<div class="info">
+<div class="label">Date:</div>
+<div class="date">07.05.2026</div>
+</div>
+
+<div class="info">
+<div class="label">Location:</div>
+Buxoro viloyati, G'ijduvon tumani, Baraka MFY
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="card" data-mchj="omad">
+
+<img src="https://picsum.photos/400/250?3">
+
+<div class="content">
+
+<div class="order">#3</div>
+
+<div class="mchj">Omad Bekzod</div>
+
+<br>
+
+<a class="id"
+href="https://e-auksion.uz/lot-view?lot_id=22758719"
+target="_blank">
+22758719
+</a>
+
+<div class="title">
+mikro GES-9 qurish loyihasi (4 kVt)
+</div>
+
+<div class="info">
+<div class="label">Date:</div>
+<div class="date">04.05.2026</div>
+</div>
+
+<div class="info">
+<div class="label">Location:</div>
+Buxoro viloyati, G'ijduvon tumani, Ulfatbibi MFY
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 4 -->
+
+<div class="card" data-mchj="dimagi">
+
+<img src="https://picsum.photos/400/250?4">
+
+<div class="content">
+
+<div class="order">#4</div>
+
+<div class="mchj">Dimagi</div>
+
+<br>
+
+<a class="id"
+href="https://e-auksion.uz/lot-view?lot_id=22838282"
+target="_blank">
 22838282
 </a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-50 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838281 ges-48">
-<td class="index">2</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838281" target="_blank">
-22838281
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-48 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
+<div class="title">
+mikro GES-50 qurish loyihasi (4 kVt)
+</div>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838275 ges-47">
-<td class="index">3</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838275" target="_blank">
-22838275
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-47 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
+<div class="info">
+<div class="label">Date:</div>
+<div class="date">07.05.2026</div>
+</div>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838274 ges-49">
-<td class="index">4</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838274" target="_blank">
-22838274
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-49 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
+<div class="info">
+<div class="label">Location:</div>
+Buxoro viloyati, G'ijduvon tumani, Baraka MFY
+</div>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838273 ges-46">
-<td class="index">5</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838273" target="_blank">
-22838273
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-46 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
+</div>
 
-<tr data-mchj="dimagi" data-search="dimagi 22838271 ges-53">
-<td class="index">6</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22838271" target="_blank">
-22838271
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-53 qurish loyihasi (4 kVt)
-</td>
-<td class="date">07.05.2026</td>
-</tr>
+</div>
 
-<tr data-mchj="dimagi" data-search="dimagi 22797823 ges-26">
-<td class="index">7</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22797823" target="_blank">
-22797823
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-26 qurish loyihasi (4 kVt)
-</td>
-<td class="date">04.05.2026</td>
-</tr>
+<script>
 
-<tr data-mchj="dimagi" data-search="dimagi 22758731 ges-25">
-<td class="index">8</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22758731" target="_blank">
-22758731
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-25 qurish loyihasi (4 kVt)
-</td>
-<td class="date">04.05.2026</td>
-</tr>
+updateStats();
 
-<tr data-mchj="dimagi" data-search="dimagi 22758728 ges-24">
-<td class="index">9</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22758728" target="_blank">
-22758728
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-24 qurish loyihasi (4 kVt)
-</td>
-<td class="date">04.05.2026</td>
-</tr>
+function filterLots(){
 
-<tr data-mchj="dimagi" data-search="dimagi 22758727 ges-23">
-<td class="index">10</td>
-<td><span class="badge">Dimagi</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=22758727" target="_blank">
-22758727
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-23 qurish loyihasi (4 kVt)
-</td>
-<td class="date">04.05.2026</td>
-</tr>
+    let input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
 
-<tr data-mchj="omad bekzod" data-search="omad bekzod 23502367 ges-18">
-<td class="index">11</td>
-<td><span class="badge">Omad Bekzod</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=23502367" target="_blank">
-23502367
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Baraka MFY,
-Katta Jilvon kanalida mikro GES-18 qurish loyihasi (4 kVt)
-</td>
-<td class="date">15.05.2026</td>
-</tr>
+    let filter =
+        document.getElementById("mchjFilter")
+        .value;
 
-<tr data-mchj="omad bekzod" data-search="omad bekzod 23502349 ulfatbibi">
-<td class="index">12</td>
-<td><span class="badge">Omad Bekzod</span></td>
-<td>
-<a href="https://e-auksion.uz/lot-view?lot_id=23502349" target="_blank">
-23502349
-</a>
-</td>
-<td>
-Buxoro viloyati, G'ijduvon tumani, Ulfatbibi MFY,
-Katta Jilvon kanalida mikro GES qurish loyihasi (4 kVt)
-</td>
-<td class="date">15.05.2026</td>
-</tr>
+    let cards =
+        document.querySelectorAll(".card");
 
-</tbody>
+    cards.forEach(card=>{
+
+        let text =
+            card.innerText.toLowerCase();
+
+        let mchj =
+            card.dataset.mchj;
+
+        let searchMatch =
+            text.includes(input);
+
+        let mchjMatch =
+            filter === "all" ||
+            mchj === filter;
+
+        if(searchMatch && mchjMatch){
+
+            card.style.display = "flex";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    updateStats();
+
+}
+
+function updateStats(){
+
+    let cards =
+        document.querySelectorAll(".card");
+
+    let total = 0;
+    let dimagi = 0;
+    let omad = 0;
+    let sandooq = 0;
+
+    cards.forEach(card=>{
+
+        if(card.style.display !== "none"){
+
+            total++;
+
+            if(card.dataset.mchj === "dimagi"){
+                dimagi++;
+            }
+
+            if(card.dataset.mchj === "omad"){
+                omad++;
+            }
+
+            if(card.dataset.mchj === "sandooq"){
+                sandooq++;
+            }
+
+        }
+
+    });
+
+    document.getElementById("totalLots").innerText = total;
+    document.getElementById("dimagiCount").innerText = dimagi;
+    document.getElementById("omadCount").innerText = omad;
+    document.getElementById("sandooqCount").innerText = sandooq;
+
+}
+
+</script>
+
+</body>
+</html>
